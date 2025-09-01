@@ -1,0 +1,22 @@
+{% extends 'tasks/base.html' %}
+{% block content %}
+<h2>Your Tasks</h2>
+<form method="get">
+    {{ request.GET.date }}
+    <input type="date" name="date">
+    <button type="submit">Filter</button>
+</form>
+<a href="{% url 'task_create' %}">+ Add Task</a>
+<ul>
+{% for task in tasks %}
+    <li>
+        <a href="{% url 'task_detail' task.pk %}">{{ task.title }}</a> - 
+        {% if task.is_completed %}<b>Completed</b>{% else %}Pending{% endif %}
+        | <a href="{% url 'task_update' task.pk %}">Edit</a> 
+        | <a href="{% url 'task_delete' task.pk %}">Delete</a>
+    </li>
+{% empty %}
+    <li>No tasks found.</li>
+{% endfor %}
+</ul>
+{% endblock %}

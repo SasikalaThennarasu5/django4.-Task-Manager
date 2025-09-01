@@ -1,0 +1,9 @@
+{% extends 'tasks/base.html' %}
+{% block content %}
+<h2>{{ object.title }}</h2>
+<p>{{ object.description }}</p>
+<p>Due: {{ object.due_date }}</p>
+<p>Status: {% if object.is_completed %}✅ Completed{% else %}❌ Pending{% endif %}</p>
+<a href="{% url 'task_update' object.pk %}">Edit</a> | 
+<a href="{% url 'task_delete' object.pk %}">Delete</a>
+{% endblock %}
